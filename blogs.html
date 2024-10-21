@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogs - Paws & Home</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Geist", sans-serif;
+        background-color: #ffffff;
+      }
+
+      .nav-bar {
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        height: 13%;
+        top: 0;
+        z-index: 1000;
+        background-color: rgba(255, 255, 255, 0.731);
+        backdrop-filter: blur(50px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #6b46c1;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: black;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #6b46c1;
+      }
+
+      .nav-links a.active {
+        color: #6b46c1;
+      }
+
+      .user-controls {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      #username-display {
+        border: 1.5px solid black;
+        padding: 0.5rem 1rem;
+        background-color: white;
+      }
+
+      .logout {
+        padding: 0.6rem 1rem;
+        text-decoration: none;
+        background-color: #6b46c1;
+        color: white;
+        transition: background-color 0.3s ease;
+      }
+
+      main {
+        margin-top: 13vh;
+        padding: 4rem 2rem;
+        background-color: #ffffff;
+        min-height: calc(100vh - 13vh - 74px);
+      }
+
+      .blog-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .blog-header h1 {
+        color: #4a4a4a;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        position: relative;
+      }
+
+      .blog-header h1::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background-color: #6b46c1;
+        margin: 0.5rem auto;
+      }
+
+      .blog-header p {
+        color: #666;
+        font-size: 1.1rem;
+      }
+
+      .blog-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem 0;
+      }
+
+      .blog-card {
+        background: white;
+        padding: 1.5rem;
+        border: 1px solid rgba(0, 0, 0, 0.556);
+        transition: transform 0.2s;
+      }
+
+      .blog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+      }
+
+      .blog-title {
+        font-size: 1.5rem;
+        color: #4a4a4a;
+        margin-bottom: 1rem;
+      }
+
+      .blog-meta {
+        display: flex;
+        justify-content: space-between;
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #eee;
+      }
+
+      .blog-content {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+
+      footer {
+        background-color: #ffffff;
+        color: black;
+        padding: 20px 0;
+      }
+
+      footer p {
+        margin: 0;
+        text-align: center;
+      }
+
+      .loading,
+      .error {
+        text-align: center;
+        padding: 2rem;
+        color: #666;
+        font-size: 1.1rem;
+      }
+
+      .error {
+        text-align: center;
+        color: #e53e3e;
+      }
+
+      footer {
+        background-color: #ffffff;
+        color: black;
+        padding: 20px 0;
+        font-family: "Geist", sans-serif;
+      }
+
+      footer p {
+        margin: 0;
+        text-align: center;
+      }
+
+      footer div {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+      }
+
+      footer div p {
+        margin: 0 15px;
+        font-size: 24px;
+      }
+
+      footer div p i {
+        transition: color 0.3s ease;
+      }
+
+      footer div p i.fa-facebook:hover {
+        cursor: pointer;
+        color: #4267b2;
+      }
+
+      footer div p i.fa-instagram:hover {
+        cursor: pointer;
+        color: #e1306c;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav-bar">
+      <a href="/home" class="logo" style="text-decoration: none"
+        ><i class="fas fa-paw"></i>&nbsp;Paws & Home</a
+      >
+      <div class="user-controls">
+        <span id="username-display"></span>
+        <a href="/logout" class="logout">Logout</a>
+      </div>
+    </nav>
+
+    <main>
+      <div class="blog-header">
+        <h1>Community Pet Stories</h1>
+        <p>Read heartwarming stories from our pet-loving community</p>
+      </div>
+
+      <div class="blog-grid">
+        <div class="loading">Loading blog posts...</div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Paws & Home. All rights reserved.</p>
+      <div>
+        <p><i class="fa-brands fa-instagram" style="text-align: center"></i></p>
+        <p><i class="fa-brands fa-facebook"></i></p>
+      </div>
+    </footer>
+    <script>
+      fetch("/get-username")
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.username) {
+            document.getElementById("username-display").textContent =
+              data.username;
+          }
+        })
+        .catch((error) => console.error("Error fetching username:", error));
+
+      async function loadBlogPosts() {
+        const blogGrid = document.querySelector(".blog-grid");
+
+        try {
+          const response = await fetch("/api/blog-posts");
+          if (!response.ok) throw new Error("Failed to fetch blog posts");
+
+          const posts = await response.json();
+
+          blogGrid.innerHTML = "";
+
+          if (posts.length === 0) {
+            blogGrid.innerHTML =
+              '<div class="error" style="text-align: center;">No blog posts found</div>';
+            return;
+          }
+
+          posts.forEach((post) => {
+            const date = new Date(post.created_at).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+
+            const blogCard = document.createElement("div");
+            blogCard.className = "blog-card";
+            blogCard.innerHTML = `
+                        <h3 class="blog-title">${post.title}</h3>
+                        <div class="blog-meta">
+                            <span>By ${post.username}</span>
+                            <span>${date}</span>
+                        </div>
+                        <div class="blog-content">${post.content}</div>
+                    `;
+
+            blogGrid.appendChild(blogCard);
+          });
+        } catch (error) {
+          console.error("Error:", error);
+          blogGrid.innerHTML =
+            '<div class="error">Error loading blog posts. Please try again later.</div>';
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", loadBlogPosts);
+    </script>
+  </body>
+</html>

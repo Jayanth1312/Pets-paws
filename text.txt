@@ -1,0 +1,10 @@
+your-project/
+├── public/
+│   ├── home.html
+│   ├── blogs.html
+│   └── login.html
+├── assets/
+│   ├── dog.jpg
+│   ├── cat.jpg
+│   └── hamster.jpg
+└── server.js
